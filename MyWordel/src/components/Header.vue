@@ -33,14 +33,14 @@ watch(() => props.won, () => { //jedesmal wenn won sich verändert entfernen wir
     <div class="container-fluid">
       <!-- Logo and title-->
       <span class="navbar-brand mb-0 h1">
-        <!-- <img src="../assets/logo.svg" alt="Logo" width="24" height="24" class="d-inline-block align-text-top"> -->
+        <img src="../../favicon2.ico" alt="Logo" width="24" height="24" class="d-inline-block align-text-top"> 
         {{ title }}
       </span>
       <span class="badge ms-2 wonn" style="background-color: slategray;" ref="badgeRef">
         🏆 {{ won }}
       </span>
       <button id="buttonToggleModal" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalRoot">
-        Spielregeln
+        Spielregeln&Stats
       </button>
     </div>
   </nav>

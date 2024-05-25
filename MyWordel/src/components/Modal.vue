@@ -1,8 +1,20 @@
 <script setup>
+import { computed } from 'vue';
 
+// Props definieren
+const props = defineProps(['won', 'lost']);
 
-defineProps(['won']);
+// Funktion zur Berechnung der durchschnittlichen Gewinnrate
+function calculateAverageWinRate(won, lost) {
+  const totalGames = won + lost;
+  if (totalGames === 0) {
+    return 0; // Vermeidung der Division durch null
+  }
+  return (won / totalGames) * 100; // Gewinnrate in Prozent
+}
 
+// Aufruf der Funktion, um die durchschnittliche Gewinnrate zu berechnen
+const averageWinRate = computed(() => calculateAverageWinRate(props.won, props.lost)); //computed => berechnung nur neu, wenn sich won oder lost verändert 
 </script>
 
 <template>
@@ -24,8 +36,10 @@ defineProps(['won']);
                             </ul>
                         </div>
                         
-                        <div class="mt-4">
+                        <div class="mt-4 stats">
                             <p>Anzahl gewonnener Spiele: {{ won }}</p>
+                            <p>Anzahl verlorener Spiele: {{ lost }}</p>
+                            <p>Durchschnittliche Gewinnrate {{ averageWinRate.toFixed(2) }}%</p> <!-- auf zwei nachkommastellen runden -->
 
                         </div>
 
@@ -59,6 +73,21 @@ defineProps(['won']);
         1px -1px 0 #000,
         -1px  1px 0 #000,
         1px  1px 0 #000; /* Schwarz als Outline-Farbe */
+}
+
+.stats {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #9e0d0d; 
+  border-radius: 10px;
+  background-color: #f0f0f0; /* Hellgrauer Hintergrund */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Leichter Schatten */
+}
+
+.stats p {
+  margin: 5px 0;
+  font-size: 16px; /* Schriftgröße */
+  color: #333; /* Dunkelgraue Schrift */
 }
 
 </style>

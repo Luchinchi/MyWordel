@@ -1,9 +1,9 @@
 <script setup>
 
-import { ref, watch} from 'vue';
+import { ref, watch, computed} from 'vue';
 
 import wordsData from '../assets/words.json'; // Passe den Pfad entsprechend an
-const emit = defineEmits(['won']);
+const emit = defineEmits(['won', 'lost']);
 
 const currentInput = ref('');
 const inputs = ref([]);
@@ -81,8 +81,20 @@ watch(gameWon, (newValue, oldValue) => { //wir watchen die gamewon variable, wen
   }
 });
 
+const gameStatus = computed(() => { //für anzahl wie oft wir verloren haben
+  return {
+    inputLength: inputs.value.length,
+    gameWon: gameWon.value
+  };
+});
 
-
+// Watcher für emit lost
+watch(gameStatus, (newStatus) => {
+  if (newStatus.inputLength >= 5 && !newStatus.gameWon) {
+    //console.log("inputs.length ist größer gleich 5 und gameWon ist false");
+    emit('lost'); //schicken an app das wir verloren haben
+  }
+});
 
 
 </script>
@@ -130,7 +142,7 @@ watch(gameWon, (newValue, oldValue) => { //wir watchen die gamewon variable, wen
             <h3>Ausgaben:</h3>
             <div style="background-color: lightgrey;">
               <ul>
-                <li style="font-weight: 500;" v-html="output" v-for="(output, index) in outputs" :key="index"></li>
+                <li style="font-weight: 500; font-size: xx-large;" v-html="output" v-for="(output, index) in outputs" :key="index"></li>
               </ul>
             </div>
         </div>

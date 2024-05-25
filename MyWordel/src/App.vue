@@ -9,6 +9,8 @@ const title = 'MyWordel'
 let won = ref(0); //wie oft haben wir gewonnen
 let showCelebration = ref(false); // track celebration state
 
+let lost = ref(0); //wie oft haben wir verloren
+
 //let lost = ref(0); //wie oft wir verloren haben
 
 function incrementWon(){ //gewinnen hochzählen
@@ -23,15 +25,19 @@ function incrementWon(){ //gewinnen hochzählen
   }
 }
 
+function incrementLost(){ //verlieren hochzählen
+  lost.value++;
+  console.log("Wir haben " + lost.value + " mal verloren") 
+}
 
 
 </script>
 
 <template>
 
-  <Header :title="title" :won="won"> </Header>
-  <Game @won="incrementWon()"></Game>
-  <Modal :won="won"></Modal>
+  <Header :title="title" :won="won" > </Header>
+  <Game @won="incrementWon()" @lost="incrementLost()"></Game>
+  <Modal :won="won" :lost="lost"></Modal>
 
   <div v-if="showCelebration" class="celebration">
     <div class="sparkles">✨✨✨</div>
