@@ -2,7 +2,7 @@
 
 import { ref, watch, computed} from 'vue';
 
-import wordsData from '../assets/words.json'; // Passe den Pfad entsprechend an
+import wordsData from '../assets/five_letter_words.json'; // HIER ANDERE WORTLIST WÄHLEN WENN MAN WCHSELN WILL
 const emit = defineEmits(['won', 'lost']);
 
 const currentInput = ref('');

@@ -11,10 +11,13 @@ let showCelebration = ref(false); // track celebration state
 
 let lost = ref(0); //wie oft haben wir verloren
 
+let streak = ref(0); //streaks
+
 //let lost = ref(0); //wie oft wir verloren haben
 
 function incrementWon(){ //gewinnen hochzählen
   won.value++;
+  streak.value++; //streak hochzählen
   console.log("wir haben " + won.value + " mal gewonnen"); //TODO entfernen wenn fertig
 
   if (won.value === 50) { // trigger celebration on 50 wins //easter egg
@@ -27,15 +30,15 @@ function incrementWon(){ //gewinnen hochzählen
 
 function incrementLost(){ //verlieren hochzählen
   lost.value++;
+  streak.value=0;
   console.log("Wir haben " + lost.value + " mal verloren") 
 }
-
 
 </script>
 
 <template>
 
-  <Header :title="title" :won="won" > </Header>
+  <Header :title="title" :won="won" :streak="streak"> </Header>
   <Game @won="incrementWon()" @lost="incrementLost()"></Game>
   <Modal :won="won" :lost="lost"></Modal>
 

@@ -2,23 +2,23 @@
 import { ref, watch } from 'vue';
 import 'bootstrap';
 
-const props = defineProps(['title', 'won']);
+const props = defineProps(['title', 'won', 'streak']);
 const badgeRef = ref(null);
 
 watch(() => props.won, () => { //jedesmal wenn won sich verändert entfernen wir die klasse und fügen die hinzu, sodass animation nochmal
-  if (badgeRef.value && props.won<5) {
+  if (badgeRef.value && props.won<10) {
     badgeRef.value.classList.remove('animiere');
     // Reflow trick: Reinsert the element or force a reflow to restart the animation
     void badgeRef.value.offsetWidth;
     badgeRef.value.classList.add('animiere');
 
-  } else if (badgeRef.value && props.won>=5 && props.won <10){ //zwischen 5 bis 9 siege
+  } else if (badgeRef.value && props.won>=10 && props.won <20){ //zwischen 5 bis 9 siege
     badgeRef.value.classList.remove('animiere2');
     // Reflow trick: Reinsert the element or force a reflow to restart the animation
     void badgeRef.value.offsetWidth;
     badgeRef.value.classList.add('animiere2');
 
-  }else if (badgeRef.value && props.won>=10) { //ab 10 siege
+  }else if (badgeRef.value && props.won>=20) { //ab 10 siege
     badgeRef.value.classList.remove('animiere3');
     // Reflow trick: Reinsert the element or force a reflow to restart the animation
     void badgeRef.value.offsetWidth;
@@ -38,6 +38,9 @@ watch(() => props.won, () => { //jedesmal wenn won sich verändert entfernen wir
       </span>
       <span class="badge ms-2 wonn" style="background-color: slategray;" ref="badgeRef">
         🏆 {{ won }}
+      </span>
+      <span class="badge ms-2 wonn" style="background-color: slategray;">
+        🔥 Streak: {{streak}}  
       </span>
       <button id="buttonToggleModal" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalRoot">
         Spielregeln&Stats
