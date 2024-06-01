@@ -1,11 +1,11 @@
 # MyWordel
 Selbstgemachtes bekanntes Wordle game, in welchem man versucht ein 5-stelliges Wort zu raten.
 
-# Aufbau
+## Aufbau
 - Logik des Spiels in JavaScript programmiert
 - mithilfe von Vue.js eine UI erstellt
 
-# weitere Funktionen
+## Weitere Funktionen
 - Streak System
 - Anzahl gewinne, Anzahl verlorener Runden, sowie durchschnittliche Gewinnchance in einem Info Block aktuell gehalten
 - Gewinnanimation
